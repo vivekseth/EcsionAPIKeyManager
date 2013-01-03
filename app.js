@@ -34,13 +34,16 @@ var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : 'root',
+  database : 'EcsionAPI',
 });
 connection.connect();
 
 connection.query('SELECT * FROM enabled', function(err, rows, fields) {
   if (err) throw err;
-
-  console.log('The solution is: ', rows[0].apikey);
+  console.log("enabled keys are:");
+  for (var i = 0; i < rows.length; i++) {
+    console.log(rows[i]);
+  };
 });
 
 app.get('/', routes.index);
