@@ -1,4 +1,4 @@
-
+//----------//Start Template//----------//
 /**
  * Module dependencies.
  */
@@ -25,6 +25,22 @@ app.configure(function(){
 
 app.configure('development', function(){
   app.use(express.errorHandler());
+});
+
+//----------//End of Template//----------//
+
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : 'root',
+});
+connection.connect();
+
+connection.query('SELECT * FROM enabled', function(err, rows, fields) {
+  if (err) throw err;
+
+  console.log('The solution is: ', rows[0].apikey);
 });
 
 app.get('/', routes.index);
