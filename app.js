@@ -29,36 +29,29 @@ app.configure('development', function(){
 
 //----------//End of Template//----------//
 
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : 'root',
-  database : 'EcsionAPI',
-});
-connection.connect();
+// var mysql      = require('mysql');
+// var connection = mysql.createConnection({
+//   host     : 'localhost',
+//   user     : 'root',
+//   password : 'root',
+//   database : 'EcsionAPI',
+// });
+// connection.connect();
 
-var ran = "not yet"
+// connection.query('SELECT * FROM enabled', function(err, rows, fields) {
+//   ran = "did start";
+//   if (err) throw err;
+//   console.log("enabled keys are:");
+//   for (var i = 0; i < rows.length; i++) {
+//     console.log(rows[i]);
+//   };
+// });
 
-var callback = function(err, rows, fields) {
-  ran = "did start";
-  if (err) throw err;
-  console.log("enabled keys are:");
-  for (var i = 0; i < rows.length; i++) {
-    console.log(rows[i]);
-  };
-}
-
-connection.query('SELECT * FROM enabled', callback);
-
-console.log(ran);
-
-connection.end();
+// connection.end();
 
 
-
-app.get('/', routes.index);
-app.get('/users', user.list);
+app.get('/', routes.index); //home where login screens
+app.get('/authenticate', user.list); //where json is returned
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
