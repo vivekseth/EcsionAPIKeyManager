@@ -38,13 +38,24 @@ var connection = mysql.createConnection({
 });
 connection.connect();
 
-connection.query('SELECT * FROM enabled', function(err, rows, fields) {
+var ran = "not yet"
+
+var callback = function(err, rows, fields) {
+  ran = "did start";
   if (err) throw err;
   console.log("enabled keys are:");
   for (var i = 0; i < rows.length; i++) {
     console.log(rows[i]);
   };
-});
+}
+
+connection.query('SELECT * FROM enabled', callback);
+
+console.log(ran);
+
+connection.end();
+
+
 
 app.get('/', routes.index);
 app.get('/users', user.list);
