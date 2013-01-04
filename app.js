@@ -21,6 +21,7 @@ app.configure(function(){
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
+  app.use(everyauth.middleware());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });
@@ -28,6 +29,9 @@ app.configure(function(){
 app.configure('development', function(){
   app.use(express.errorHandler());
 });
+
+everyauth.helpExpress(app);
+
 
 
 app.get('/authenticate', routes.authenticate); //home where login screens
