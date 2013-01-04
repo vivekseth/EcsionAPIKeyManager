@@ -39,6 +39,10 @@ exports.authenticate = function(req, res){
 		res.render('index', { title: 'Express' });
 	} 
 };
+
+exports.home = function(req, res) {
+	res.render("index", {title: "home"});
+};
  
 var dbQuery =function(q, callback) {
 	if (connection == null) {
