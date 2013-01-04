@@ -5,7 +5,7 @@
 var mysql = require('mysql');
 var connection = null; 
 
-exports.index = function(req, res){
+exports.authenticate = function(req, res){
 	console.log(req.query);
 	var queryString = "SELECT * FROM enabled WHERE apikey='" + req.query.apikey + "'";
 	var jsonObj = {};
@@ -39,15 +39,8 @@ exports.index = function(req, res){
 		res.render('index', { title: 'Express' });
 	} 
 };
-
-exports.authenticate = function(req, res){
-	if (req.body.apikey === "hello" && req.body.application === "world") {
-		res.render('index', { title: 'Express' });
-	}
-};
-
+ 
 var dbQuery =function(q, callback) {
-	//connection.connect();
 	if (connection == null) {
 		connection = mysql.createConnection({
 		  host    : 'localhost',
@@ -60,8 +53,9 @@ var dbQuery =function(q, callback) {
 	connection.query(q, function(err, rows, fields) {
 		if (err) throw err;
 		callback(rows, fields);
-		connection.end();
-		connection = null;
+		if (connection != null) {
+			connection.end();
+			connection = null;
+		}
 	});
-	//connection.end();
 }

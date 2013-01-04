@@ -50,8 +50,7 @@ app.configure('development', function(){
 // connection.end();
 
 
-app.get('/', routes.index); //home where login screens
-app.get('/authenticate', user.list); //where json is returned
+app.get('/authenticate', routes.authenticate); //home where login screens
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
