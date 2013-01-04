@@ -3,6 +3,8 @@
  * Module dependencies.
  */
 
+var everyauth = require('everyauth');
+
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
@@ -30,6 +32,8 @@ app.configure('development', function(){
 
 app.get('/authenticate', routes.authenticate); //home where login screens
 app.get('/', routes.home);
+app.post('/login', routes.login);
+//app.get('/login', routes.login);
 
 //test
 

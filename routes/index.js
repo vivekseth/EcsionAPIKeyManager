@@ -43,6 +43,16 @@ exports.authenticate = function(req, res){
 exports.home = function(req, res) {
 	res.render("index", {title: "home"});
 };
+
+exports.login = function(req, res) {
+	var username = req.body.username;
+	var password = req.body.password;
+
+	console.log(req.body)
+	console.log(req)
+
+	login(username, password, res)
+};
  
 var dbQuery =function(q, callback) {
 	if (connection == null) {
@@ -60,6 +70,19 @@ var dbQuery =function(q, callback) {
 		if (connection != null) {
 			connection.end();
 			connection = null;
+		}
+	});
+}
+
+var login = function(username, password, res) {
+	console.log(username + ", " + password);
+	dbQuery("select * from users where username='"+username+"' AND password='"+password+"'", function(rows, fields) {
+		if (rows.length == 1) {
+			res.render("login", {title: "home", userinfo: rows[0]});
+		}
+		else {
+			res.write("invalid username or password");
+			res.end();
 		}
 	});
 }

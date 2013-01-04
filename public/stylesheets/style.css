@@ -8,13 +8,13 @@ a {
   color: #00B7FF;
 }
 
-#loginpanel {
+.mainbox {
 	background-color: #fff;
 	padding: 75px 50px;
 	
 	width: 350px;
 	margin: 0 auto;
-	margin-top: 100px;
+	xmargin-top: 50px;
 
 	-webkit-border-radius: 10px;
     -moz-border-radius: 10px;

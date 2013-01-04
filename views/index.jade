@@ -1,11 +1,10 @@
 extends layout
 
 block content
-	#loginpanel
+	#loginpanel.mainbox
 		h1= "Admin Access"
 		p Please log in
-		form(action='/')
-			input#username(type='text', value='username')
-			input#password(type='password', value='password')
+		form(action='/login', method='post')
+			input#username(type='text', name='username')
+			input#password(type='password', name='password')
 			input#submit(type='submit', value='Log In')
-			
