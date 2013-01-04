@@ -56,8 +56,12 @@ exports.login = function(req, res) {
 };
 
 exports.login2 = function(req, res) {
-	console.log(req.user);
-	res.render("login", {title: "home", userinfo: req.user});
+	if (req.user) {
+		res.render("login", {title: "home", userinfo: req.user});
+	}
+	else {
+		res.render("index", {title: "home"});
+	}
 }
  
 var dbQuery =function(q, callback) {
