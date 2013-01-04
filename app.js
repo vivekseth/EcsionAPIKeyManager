@@ -27,28 +27,6 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-//----------//End of Template//----------//
-
-// var mysql      = require('mysql');
-// var connection = mysql.createConnection({
-//   host     : 'localhost',
-//   user     : 'root',
-//   password : 'root',
-//   database : 'EcsionAPI',
-// });
-// connection.connect();
-
-// connection.query('SELECT * FROM enabled', function(err, rows, fields) {
-//   ran = "did start";
-//   if (err) throw err;
-//   console.log("enabled keys are:");
-//   for (var i = 0; i < rows.length; i++) {
-//     console.log(rows[i]);
-//   };
-// });
-
-// connection.end();
-
 
 app.get('/authenticate', routes.authenticate); //home where login screens
 
