@@ -1,5 +1,10 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	h1= title
+	p Welcome to #{title}
+	form(action='/')
+		input#username(type='text', value='username')
+		input#password(type='password', value='password')
+		input#submit(type='submit', value='Log In')
+		
