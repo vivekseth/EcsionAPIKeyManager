@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var everyauth = require('everyauth');
+var everyauth = require('everyauth-express3');
 
 var express = require('express')
   , routes = require('./routes')
@@ -20,8 +20,10 @@ app.configure(function(){
   app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
+  app.use(express.cookieParser('mr ripley'));
+  app.use(express.session());
+  app.use(everyauth.middleware(app));
   app.use(express.methodOverride());
-  app.use(everyauth.middleware());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });
@@ -30,13 +32,15 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-everyauth.helpExpress(app);
+
+
 
 
 
 app.get('/authenticate', routes.authenticate); //home where login screens
 app.get('/', routes.home);
 app.post('/login', routes.login);
+app.get('/login', routes.login2);
 //app.get('/login', routes.login);
 
 //test
