@@ -46,6 +46,8 @@ exports.home = function(req, res) {
 };
 
 exports.login = function(req, res) {
+	displayPageIfAuth(req, res, "login", {title: "home", userinfo: req.user});
+
 	if (req.user) {
 		res.render("login", {title: "home", userinfo: req.user});
 	}
@@ -54,6 +56,23 @@ exports.login = function(req, res) {
 	}
 }
  
+exports.adduser = function(req, res) {
+	displayPageIfAuth(req, res, "adduser", null);
+}
+
+
+var displayPageIfAuth = function(req, res, jadeFileName, data) {
+	if (req.user) {
+		res.render(jadeFileName, data);
+	}
+	else {
+		res.writeHead(302, {
+		  'Location': '/'
+		});
+		res.end();
+	}
+}
+
 var dbQuery =function(q, callback) {
 	if (connection == null) {
 		connection = mysql.createConnection({
