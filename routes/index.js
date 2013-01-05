@@ -42,18 +42,29 @@ exports.authenticate = function(req, res){
 };
 
 exports.home = function(req, res) {
-	res.render("index", {title: "home"});
+	console.log("home");
+	if (req.user) {
+		console.log("if");
+		res.writeHead(302, {
+		  'Location': '/login'
+		});
+		res.end();
+	}
+	else {
+		console.log("else");
+		res.render("index", {title: "home"});
+	}
 };
 
 exports.login = function(req, res) {
 	displayPageIfAuth(req, res, "login", {title: "home", userinfo: req.user});
 
-	if (req.user) {
-		res.render("login", {title: "home", userinfo: req.user});
-	}
-	else {
-		res.render("index", {title: "home"});
-	}
+	// if (req.user) {
+	// 	res.render("login", {title: "home", userinfo: req.user});
+	// }
+	// else {
+	// 	res.render("index", {title: "home"});
+	// }
 }
  
 exports.adduserDisplay = function(req, res) {
@@ -95,10 +106,12 @@ var displayPageIfAuth = function(req, res, jadeFileName, data) {
 		res.render(jadeFileName, data);
 	}
 	else {
-		res.writeHead(302, {
-		  'Location': '/'
-		});
-		res.end();
+		res.render("index", {title: "home"});
+		// console.log("not logged in, redirecting to home");
+		// res.writeHead(302, {
+		//   'Location': '/'
+		// });
+		// res.end();
 	}
 }
 
