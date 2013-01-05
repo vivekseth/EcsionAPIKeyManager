@@ -7,9 +7,17 @@ block content
 		p Please fill out info.
 		form(action='/adduser', method='post')
 			ol
-				li: input#username(type='text', name='username')
-				li: input#password(type='password', name='password')
-				li: input#admin(type='checkbox', name='admin')
-				li: input#email(type='text', name='email')
+				li
+					| username
+					input#username(type='text', name='username')
+				li
+					| password
+					input#password(type='password', name='password')
+				li
+					| admin?
+					input#admin(type='checkbox', name='admin')
+				li
+					| email
+					input#email(type='text', name='email')
 				li: input#submit(type='submit', value='submit')
 			a(href='/logout') log out

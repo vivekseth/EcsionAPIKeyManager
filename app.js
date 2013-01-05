@@ -40,6 +40,9 @@ app.configure('development', function(){
 app.get('/authenticate', routes.authenticate); //home where login screens
 app.get('/', routes.home);
 app.get('/login', routes.login);
+app.get('/adduser', routes.adduserDisplay);
+app.post('/adduser', routes.adduserPost);
+
 //app.get('/login', routes.login);
 
 //test

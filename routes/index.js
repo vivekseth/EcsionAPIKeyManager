@@ -56,7 +56,36 @@ exports.login = function(req, res) {
 	}
 }
  
-exports.adduser = function(req, res) {
+exports.adduserDisplay = function(req, res) {
+	displayPageIfAuth(req, res, "adduser", null);
+}
+
+exports.adduserPost = function(req, res) {
+	console.log(req.body);
+	
+	var username = req.body.username;
+	var password = req.body.password;
+	var admin = req.body.admin === "on" ? 1 : 0;
+	var email = req.body.email;
+	if (req.user.admin === 1) {
+		dbQuery("SELECT * FROM users WHERE username = '"+ username +"'",
+		function(rows, fields) {
+			if(rows.length == 0) {
+				dbQuery("INSERT INTO users (username, password, admin, email)" +
+			 	"VALUES ('"+ username +"', '"+ password +"', "+ admin +", '"+ email +"')",
+			 	function(rows, fields) {
+
+			 	});
+			}
+			else {
+				console.log("user already exists!");
+			}
+		});
+	}
+	else {
+		console.log("permission denied!");
+	}
+ 
 	displayPageIfAuth(req, res, "adduser", null);
 }
 
