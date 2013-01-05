@@ -46,16 +46,6 @@ exports.home = function(req, res) {
 };
 
 exports.login = function(req, res) {
-	var username = req.body.username;
-	var password = req.body.password;
-
-	console.log(req.body)
-	console.log(req)
-
-	login(username, password, res)
-};
-
-exports.login2 = function(req, res) {
 	if (req.user) {
 		res.render("login", {title: "home", userinfo: req.user});
 	}

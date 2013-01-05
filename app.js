@@ -39,8 +39,7 @@ app.configure('development', function(){
 
 app.get('/authenticate', routes.authenticate); //home where login screens
 app.get('/', routes.home);
-app.post('/login', routes.login);
-app.get('/login', routes.login2);
+app.get('/login', routes.login);
 //app.get('/login', routes.login);
 
 //test
